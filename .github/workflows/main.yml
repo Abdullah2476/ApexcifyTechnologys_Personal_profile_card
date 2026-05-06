@@ -18,12 +18,14 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: '12'
+          java-version: '17'
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           architecture: x64
 
+      - run: flutter pub get
+      - run: flutter doctor -v
       - run: flutter build apk --release --split-per-abi
       - run: |
           flutter build ios --no-codesign
